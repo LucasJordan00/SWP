@@ -6,20 +6,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
-import java.util.Random;
 
 public class HelloController {
     private File file;
+    private String filePath;
 
     @FXML
     private Label welcomeText;
@@ -69,9 +67,9 @@ public class HelloController {
             return content.toString();
         }
 
-        public static void writeRandomNumberToFile(String filePath) {
+        public static int writeRandomNumberToFile(String filePath) {
             Random random = new Random();
-            int randomNumber = random.nextInt(99999);
+            int randomNumber = random.nextInt(100001);
 
             try (FileWriter writer = new FileWriter(filePath)) {
                 writer.write(String.valueOf(randomNumber));
@@ -79,14 +77,37 @@ public class HelloController {
                 // Handle any exceptions here
                 e.printStackTrace();
             }
+            return randomNumber;
         }
 
             public void btnPressSave(ActionEvent actionEvent) {
     }
 
     public void btnPressRandNum(ActionEvent actionEvent) {
-        String filePath = file.getAbsolutePath();
-        writeRandomNumberToFile(filePath);
+         filePath = file.getAbsolutePath();
+       int a = writeRandomNumberToFile(filePath);
         fldTxtArea.setText(readFileAsString(file.getAbsolutePath()));
+        String all = readFileAsString(file.getAbsolutePath());
+
+        if (a >  500) {
+            fldTxtArea.setStyle("-fx-background-color: #38ee00;");
+        }
+        if (a > 1000){
+            fldTxtArea.setStyle("-fx-background-color: #eed600;");
+        }
+        if (a < 5000){
+            fldTxtArea.setStyle("-fx-background-color: #00eeda;");
+        }
+        if (a > 10000){
+            fldTxtArea.setStyle("-fx-background-color: #003fee;");
+        }
+        if (a > 50000){
+            fldTxtArea.setStyle("-fx-background-color: #ee00be;");
+        }
+        if (a > 100000){
+            fldTxtArea.setStyle("-fx-background-color: #ee0000;");
+        }
+
+
     }
 }
