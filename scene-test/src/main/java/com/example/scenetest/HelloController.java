@@ -87,6 +87,6 @@ public class HelloController {
     public void btnPressRandNum(ActionEvent actionEvent) {
         String filePath = file.getAbsolutePath();
         writeRandomNumberToFile(filePath);
-
+        fldTxtArea.setText(readFileAsString(file.getAbsolutePath()));
     }
 }
